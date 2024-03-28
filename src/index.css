@@ -31,8 +31,10 @@ aside {
 
 html,
 body {
-    height: 100%;
-    width: 100%;
+  margin-left: calc(50% - 720px);
+  margin-right: calc(50% - 720px);
+    /* height: 100%;
+    width: 100%; */
     font-family: 'Montserrat', sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
