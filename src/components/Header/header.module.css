@@ -10,6 +10,12 @@
     font-weight: 700;
     font-size: 25px;
     line-height: 30.48px;
+    transition: 0.5s;
+}
+
+.logo:hover {
+    color: #ffa542;
+    font-weight: 900;
 }
 
 .ul {
@@ -27,6 +33,7 @@
     font-size: 22px;
     line-height: 20px;
     color: #838383;
+    transition: 0.2s;
 }
 
 .icon:hover {

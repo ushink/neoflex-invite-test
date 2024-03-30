@@ -1,10 +1,10 @@
+import Footer from '../../components/Footer/footer'
 import Header from '../../components/Header/header'
 import ProductsList from '../../components/Products/productsList'
 import { wiredHeadset, wirelessHeadset } from '../../mock/poducts'
 import s from './main.module.css'
 
 export default function Main() {
-    console.log(wiredHeadset)
     return (
         <>
             <Header />
@@ -18,6 +18,7 @@ export default function Main() {
                     <ProductsList products={wirelessHeadset} />
                 </section>
             </main>
+            <Footer/>
         </>
     )
 }
