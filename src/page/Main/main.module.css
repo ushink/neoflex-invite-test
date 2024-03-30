@@ -1,3 +1,14 @@
-.header {
-    background-color: blue;
+.main {
+    margin: 28px 148px 20px 182px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.title {
+    color: #838383;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24.38px;
+    margin-bottom: 20px;
 }

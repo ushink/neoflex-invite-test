@@ -1,0 +1,76 @@
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.productCard {
+    width: 100%;
+    max-width: 350px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px 0px #0000001a;
+    padding: 16px 18px 0 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.7s;
+}
+
+.productCard:hover {
+    box-shadow: 0px 0px 20px 0px #0000009f;
+}
+
+.image {
+    max-width: 220px;
+    max-height: 240px;
+    padding-bottom: 54px;
+    cursor: pointer;
+}
+
+.name,
+.price,
+.rate,
+.buttonBuy {
+    color: #1c1c27;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 20.72px;
+}
+
+.price {
+    color: #ffa542;
+}
+
+.price::after {
+    content: ' ₽';
+}
+
+.rate {
+    color: #838383;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rate::before {
+    content: url('/public/img/star.svg');
+}
+
+.buttonBuy {
+    color: #000000;
+    background-color: transparent;
+    transition: 0.2s;
+}
+
+.buttonBuy:hover {
+    color: #838383;
+    text-decoration: underline;
+}
+
+.info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 26px;
+}
