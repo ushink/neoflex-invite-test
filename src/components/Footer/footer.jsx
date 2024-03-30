@@ -1,5 +1,5 @@
 import s from './footer.module.css'
-import { IconsSvg } from '../../helpers/IconsSvg'
+import { IconsSvg } from '../../helpers/FooterIconsSvg'
 import { Link } from 'react-router-dom'
 
 export default function Footer() {
