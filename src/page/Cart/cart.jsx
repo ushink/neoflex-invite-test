@@ -18,6 +18,9 @@ export default function Cart() {
             setCount((prevValue) => prevValue - 1)
         }
     }
+
+    const productsCart = JSON.parse(localStorage.getItem('cart'))
+
     return (
         <>
             <Header />
@@ -25,41 +28,43 @@ export default function Cart() {
                 <h1 className={s.title}>Корзина</h1>
                 <div className={s.wrapperGrid}>
                     <section className={s.products}>
-                        <div className={s.product}>
-                            <button className={s.delete}>
-                                <MainIconsSvg id={'delete'} />
-                            </button>
+                        {productsCart?.map((el) => (
+                            <div className={s.product} key={el.id}>
+                                <button className={s.delete}>
+                                    <MainIconsSvg id={'delete'} />
+                                </button>
 
-                            <div className={s.wrapperInfo}>
-                                <img
-                                    className={s.img}
-                                    src="./img/assets/BO4.png"
-                                    alt=""
-                                />
-                                <div className={s.counter}>
-                                    <button
-                                        className={s.decrease}
-                                        onClick={decrement}
-                                    >
-                                        -
-                                    </button>
-                                    <span className={s.count}>{count}</span>
-                                    <button
-                                        className={s.increase}
-                                        onClick={increment}
-                                    >
-                                        +
-                                    </button>
+                                <div className={s.wrapperInfo}>
+                                    <img
+                                        className={s.img}
+                                        src={el.src}
+                                        alt=""
+                                    />
+                                    <div className={s.counter}>
+                                        <button
+                                            className={s.decrease}
+                                            onClick={decrement}
+                                        >
+                                            -
+                                        </button>
+                                        <span className={s.count}>{count}</span>
+                                        <button
+                                            className={s.increase}
+                                            onClick={increment}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className={s.info}>
-                                <p className={s.name}>BO4</p>
-                                <p className={s.price}>2638</p>
-                            </div>
+                                <div className={s.info}>
+                                    <p className={s.name}>{el.name}</p>
+                                    <p className={s.price}>{el.price}</p>
+                                </div>
 
-                            <span className={s.allPrice}>2658</span>
-                        </div>
+                                <span className={s.allPrice}>2658</span>
+                            </div>
+                        ))}
                     </section>
                     <section className={s.totalBox}>
                         <div className={s.total}>
