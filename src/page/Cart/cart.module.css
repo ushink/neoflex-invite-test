@@ -82,37 +82,6 @@
     content: ' ₽';
 }
 
-.counter {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    margin-top: 19px;
-}
-
-.decrease,
-.increase {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #ffce7f;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 12px;
-}
-
-.decrease:hover,
-.increase:hover {
-    box-shadow: 0px 0px 20px 0px #00000065;
-}
-
-.count {
-    color: #000000;
-    font-weight: 600;
-    font-size: 17px;
-    line-height: 20.72px;
-}
-
 .allPrice {
     position: absolute;
     bottom: 15px;
