@@ -1,5 +1,7 @@
 .main {
-    margin: 28px 148px 20px 182px;
+    width: 100%;
+    max-width: 1110px;
+    margin: 28px 165px 20px 165px;
     display: flex;
     flex-direction: column;
     gap: 28px;
