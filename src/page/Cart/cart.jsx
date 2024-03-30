@@ -1,9 +1,23 @@
+import { useState } from 'react'
 import Footer from '../../components/Footer/footer'
 import Header from '../../components/Header/header'
 import { MainIconsSvg } from '../../helpers/MainIconsSvg'
 import s from './cart.module.css'
 
 export default function Cart() {
+    const [count, setCount] = useState(1)
+
+    const increment = () => {
+        if (count >= 1) {
+            setCount((prevValue) => prevValue + 1)
+        }
+    }
+
+    const decrement = () => {
+        if (count >= 2) {
+            setCount((prevValue) => prevValue - 1)
+        }
+    }
     return (
         <>
             <Header />
@@ -23,9 +37,19 @@ export default function Cart() {
                                     alt=""
                                 />
                                 <div className={s.counter}>
-                                    <button className={s.decrease}>-</button>
-                                    <span className={s.count}>1</span>
-                                    <button className={s.increase}>+</button>
+                                    <button
+                                        className={s.decrease}
+                                        onClick={decrement}
+                                    >
+                                        -
+                                    </button>
+                                    <span className={s.count}>{count}</span>
+                                    <button
+                                        className={s.increase}
+                                        onClick={increment}
+                                    >
+                                        +
+                                    </button>
                                 </div>
                             </div>
 
