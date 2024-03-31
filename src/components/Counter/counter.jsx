@@ -1,28 +1,37 @@
-import { useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useMyContext } from '../../context/myContext'
 import s from './counter.module.css'
 
-export default function Counter(count) {
-    const [counts, setCounts] = useState(count?.count)
+export default function Counter({ counts, id }) {
+    const { cart, setCart } = useMyContext()
 
-    const increment = () => {
+    const increment = (id) => {
+        // react придерживается принципа иммутабельности
+        // поэтому чтобы не мутировать создаем новый массив
         if (counts >= 1) {
-            setCounts((prevValue) => prevValue + 1)
+            const updatedCart = cart.map((el) =>
+                el.id === id ? { ...el, quantity: el.quantity + 1 } : el
+            )
+            setCart(updatedCart)
         }
     }
 
-    const decrement = () => {
+    const decrement = (id) => {
         if (counts >= 2) {
-            setCounts((prevValue) => prevValue - 1)
+            const updatedCart = cart.map((el) =>
+                el.id === id ? { ...el, quantity: el.quantity - 1 } : el
+            )
+            setCart(updatedCart)
         }
     }
 
     return (
         <div className={s.counter}>
-            <button className={s.decrease} onClick={decrement}>
+            <button className={s.decrease} onClick={() => decrement(id)}>
                 -
             </button>
             <span className={s.count}>{counts}</span>
-            <button className={s.increase} onClick={increment}>
+            <button className={s.increase} onClick={() => increment(id)}>
                 +
             </button>
         </div>
