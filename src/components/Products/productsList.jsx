@@ -1,30 +1,27 @@
-import { useEffect, useState } from 'react'
+/* eslint-disable react/prop-types */
 import s from './productsList.module.css'
+import { useMyContext } from '../../context/myContext'
 
-export default function ProductsList(products) {
-    const [cart, setCart] = useState([])
+export default function ProductsList({ products }) {
+    const { cart, setCart } = useMyContext()
 
     const handleAddToCart = (select) => {
-        if (cart.length === 0) {
-            setCart([...cart, { ...select }])
+        const isItemInCart = cart.find((cartItem) => cartItem.id === select.id)
+
+        if (isItemInCart) {
+            const newCart = cart.map((el) =>
+                el.id === select.id ? { ...el, quantity: el.quantity + 1 } : el
+            )
+            setCart(newCart)
         } else {
-            setCart([
-                ...JSON.parse(localStorage.getItem('cart')),
-                { ...select }
-            ])
+            setCart([...cart, { ...select }])
         }
     }
 
-    useEffect(() => {
-        if (cart.length !== 0) {
-            localStorage.setItem('cart', JSON.stringify(cart))
-        }
-    }, [cart])
-
     return (
         <div className={s.products}>
-            {products?.products.map((el) => (
-                <div className={s.productCard} key={Math.random()}>
+            {products?.map((el) => (
+                <div className={s.productCard} key={el.id}>
                     <img className={s.image} src={el.img} alt="" />
                     <div className={s.info}>
                         <h3 className={s.name}>{el.title}</h3>
@@ -35,12 +32,12 @@ export default function ProductsList(products) {
                         <button
                             className={s.buttonBuy}
                             onClick={() => {
-                                console.log(el.id)
                                 handleAddToCart({
                                     id: el.id,
                                     src: el.img,
                                     name: el.title,
-                                    price: el.price
+                                    price: el.price,
+                                    quantity: 1
                                 })
                             }}
                         >
