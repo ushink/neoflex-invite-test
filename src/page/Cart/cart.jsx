@@ -3,12 +3,13 @@ import Header from '../../components/Header/header'
 import { MainIconsSvg } from '../../helpers/MainIconsSvg'
 import s from './cart.module.css'
 import Counter from '../../components/Counter/counter'
+import { useMyContext } from '../../context/myContext'
 
 export default function Cart() {
-    const productsCart = JSON.parse(localStorage.getItem('cart'))
+    const { cart } = useMyContext()
 
     function getTotalPrice() {
-        return productsCart.reduce((totalPrice, item) => {
+        return cart.reduce((totalPrice, item) => {
             return totalPrice + item.price * item.quantity
         }, 0)
     }
@@ -20,7 +21,7 @@ export default function Cart() {
                 <h1 className={s.title}>Корзина</h1>
                 <div className={s.wrapperGrid}>
                     <section className={s.products}>
-                        {productsCart?.map((el) => (
+                        {cart?.map((el) => (
                             <div className={s.product} key={el.id}>
                                 <button className={s.delete}>
                                     <MainIconsSvg id={'delete'} />
@@ -32,7 +33,7 @@ export default function Cart() {
                                         src={el.src}
                                         alt=""
                                     />
-                                    <Counter count={el.quantity} />
+                                    <Counter counts={el.quantity} id={el.id} />
                                 </div>
 
                                 <div className={s.info}>
@@ -41,7 +42,9 @@ export default function Cart() {
                                 </div>
 
                                 <span className={s.allPrice}>
-                                    {el.price * el.quantity}
+                                    {(el.price * el.quantity).toLocaleString(
+                                        'ru-RU'
+                                    )}
                                 </span>
                             </div>
                         ))}
@@ -50,7 +53,7 @@ export default function Cart() {
                         <div className={s.total}>
                             <h2 className={s.totalTitle}>ИТОГО</h2>
                             <span className={s.totalPrice}>
-                                {getTotalPrice()}
+                                {getTotalPrice().toLocaleString('ru-RU')}
                             </span>
                         </div>
                         <button className={s.buy}>Перейти к оформлению</button>
