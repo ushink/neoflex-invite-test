@@ -2,8 +2,22 @@ import Footer from '../../components/Footer/footer'
 import Header from '../../components/Header/header'
 import { MainIconsSvg } from '../../helpers/MainIconsSvg'
 import s from './cart.module.css'
+import Counter from '../../components/Counter/counter'
+import { useMyContext } from '../../context/myContext'
 
 export default function Cart() {
+    const { cart, setCart } = useMyContext()
+
+    function getTotalPrice() {
+        return cart.reduce((totalPrice, item) => {
+            return totalPrice + item.price * item.quantity
+        }, 0)
+    }
+
+    function deleteProduct(id) {
+        setCart(cart.filter((item) => item.id !== id))
+    }
+
     return (
         <>
             <Header />
@@ -11,36 +25,45 @@ export default function Cart() {
                 <h1 className={s.title}>Корзина</h1>
                 <div className={s.wrapperGrid}>
                     <section className={s.products}>
-                        <div className={s.product}>
-                            <button className={s.delete}>
-                                <MainIconsSvg id={'delete'} />
-                            </button>
+                        {cart?.map((el) => (
+                            <div className={s.product} key={el.id}>
+                                <button
+                                    className={s.delete}
+                                    onClick={() => deleteProduct(el.id)}
+                                >
+                                    <MainIconsSvg id={'delete'} />
+                                </button>
 
-                            <div className={s.wrapperInfo}>
-                                <img
-                                    className={s.img}
-                                    src="./img/assets/BO4.png"
-                                    alt=""
-                                />
-                                <div className={s.counter}>
-                                    <button className={s.decrease}>-</button>
-                                    <span className={s.count}>1</span>
-                                    <button className={s.increase}>+</button>
+                                <div className={s.wrapperInfo}>
+                                    <img
+                                        className={s.img}
+                                        src={el.src}
+                                        alt={el.name}
+                                    />
+                                    <Counter counts={el.quantity} id={el.id} />
                                 </div>
-                            </div>
 
-                            <div className={s.info}>
-                                <p className={s.name}>BO4</p>
-                                <p className={s.price}>2638</p>
-                            </div>
+                                <div className={s.info}>
+                                    <p className={s.name}>{el.name}</p>
+                                    <p className={s.price}>
+                                        {el.price.toLocaleString('ru-RU')}
+                                    </p>
+                                </div>
 
-                            <span className={s.allPrice}>2658</span>
-                        </div>
+                                <span className={s.allPrice}>
+                                    {(el.price * el.quantity).toLocaleString(
+                                        'ru-RU'
+                                    )}
+                                </span>
+                            </div>
+                        ))}
                     </section>
                     <section className={s.totalBox}>
                         <div className={s.total}>
                             <h2 className={s.totalTitle}>ИТОГО</h2>
-                            <span className={s.totalPrice}>2658</span>
+                            <span className={s.totalPrice}>
+                                {getTotalPrice().toLocaleString('ru-RU')}
+                            </span>
                         </div>
                         <button className={s.buy}>Перейти к оформлению</button>
                     </section>
