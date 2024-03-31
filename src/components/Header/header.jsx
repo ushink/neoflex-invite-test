@@ -1,8 +1,17 @@
 import { Link } from 'react-router-dom'
 import s from './header.module.css'
 import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons'
+import { useMyContext } from '../../context/myContext'
 
 export default function Header() {
+    const { cart } = useMyContext()
+
+    function getCartLength() {
+        return cart.reduce((length, item) => {
+            return length + item.quantity
+        }, 0)
+    }
+
     return (
         <header className={s.header}>
             <Link to="/">
@@ -23,7 +32,9 @@ export default function Header() {
                                 style={{ fontSize: '28px' }}
                             />
                         </Link>
-                        <div className={s.circle}>1</div>
+                        {getCartLength() !== 0 && (
+                            <div className={s.circle}>{getCartLength()}</div>
+                        )}
                     </li>
                 </ul>
             </nav>
