@@ -25,9 +25,17 @@ export default function ProductsList({ products }) {
                     <img className={s.image} src={el.img} alt="" />
                     <div className={s.info}>
                         <h3 className={s.name}>{el.title}</h3>
-                        <p className={s.price}>
-                            {el.price.toLocaleString('ru-RU')}
-                        </p>
+                        <div className={s.priceBox}>
+                            <p className={s.price}>
+                                {el.price.toLocaleString('ru-RU')}
+                            </p>
+
+                            {el.oldPrice && (
+                                <p className={s.oldPrice}>
+                                    {el.oldPrice.toLocaleString('ru-RU')}
+                                </p>
+                            )}
+                        </div>
                     </div>
                     <div className={s.info}>
                         <span className={s.rate}>{el.rate}</span>
