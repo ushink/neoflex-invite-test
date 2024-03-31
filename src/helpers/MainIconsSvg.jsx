@@ -1,5 +1,6 @@
-export const MainIconsSvg = (id) => {
-    switch (id?.id) {
+/* eslint-disable react/prop-types */
+export const MainIconsSvg = ({ id }) => {
+    switch (id) {
         case 'delete':
             return (
                 <svg

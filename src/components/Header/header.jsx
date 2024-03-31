@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import s from './header.module.css'
-import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { useMyContext } from '../../context/myContext'
+import { HeaderIconsSvg } from '../../helpers/HeaderIconsSvg'
 
 export default function Header() {
     const { cart } = useMyContext()
@@ -21,16 +21,13 @@ export default function Header() {
                 <ul className={s.ul}>
                     <li className={s.li}>
                         <Link to="#">
-                            <HeartOutlined className={s.icon} />
+                            <HeaderIconsSvg id={'heart'} />
                         </Link>
                         <div className={s.circle}>2</div>
                     </li>
                     <li className={s.li}>
                         <Link to="/cart">
-                            <ShoppingCartOutlined
-                                className={s.icon}
-                                style={{ fontSize: '28px' }}
-                            />
+                            <HeaderIconsSvg id={'cart'} />
                         </Link>
                         {getCartLength() !== 0 && (
                             <div className={s.circle}>{getCartLength()}</div>
