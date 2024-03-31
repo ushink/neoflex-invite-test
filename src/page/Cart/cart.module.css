@@ -38,6 +38,10 @@
     fill: #e20000;
 }
 
+.delete:active {
+    fill: #f18e8e;
+}
+
 .product {
     background-color: #ffffff;
     box-shadow: 0px 0px 20px 0px #0000001a;
@@ -142,4 +146,8 @@
     background-color: #ffa542;
     box-shadow: 0px 0px 20px 0px #000000a8;
     color: #1c1c27;
+}
+
+.buy:active {
+    background-color: #f9c792;
 }
