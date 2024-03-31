@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import { useState } from 'react'
 import Footer from '../../components/Footer/footer'
 import Header from '../../components/Header/header'
 import { MainIconsSvg } from '../../helpers/MainIconsSvg'
@@ -9,9 +7,15 @@ import Counter from '../../components/Counter/counter'
 export default function Cart() {
     const productsCart = JSON.parse(localStorage.getItem('cart'))
 
+    function getTotalPrice() {
+        return productsCart.reduce((totalPrice, item) => {
+            return totalPrice + item.price * item.quantity
+        }, 0)
+    }
+
     return (
         <>
-            <Header/>
+            <Header />
             <main className={s.main}>
                 <h1 className={s.title}>Корзина</h1>
                 <div className={s.wrapperGrid}>
@@ -28,7 +32,7 @@ export default function Cart() {
                                         src={el.src}
                                         alt=""
                                     />
-                                    <Counter count={el.count} />
+                                    <Counter count={el.quantity} />
                                 </div>
 
                                 <div className={s.info}>
@@ -36,14 +40,18 @@ export default function Cart() {
                                     <p className={s.price}>{el.price}</p>
                                 </div>
 
-                                <span className={s.allPrice}>{el.price * el.count}</span>
+                                <span className={s.allPrice}>
+                                    {el.price * el.quantity}
+                                </span>
                             </div>
                         ))}
                     </section>
                     <section className={s.totalBox}>
                         <div className={s.total}>
                             <h2 className={s.totalTitle}>ИТОГО</h2>
-                            <span className={s.totalPrice}>2658</span>
+                            <span className={s.totalPrice}>
+                                {getTotalPrice()}
+                            </span>
                         </div>
                         <button className={s.buy}>Перейти к оформлению</button>
                     </section>
